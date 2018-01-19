@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
+#include <time.h>
 
 
 
@@ -13,7 +14,7 @@ shuffle_n_integers(int array_len)
   int temp_values[array_len];
   int index_tracker[array_len];
   int i;
-
+  
   for(i=0;i<array_len;i++){
     temp_values[i]=i;     // temporary ordered list
     index_tracker[i] = 1; // keeps track of what indicies have already been used
@@ -56,6 +57,7 @@ flush(void){
 
 int
 main(){
+  srand(time(0));
   int num_words = 9;
   const char *words[]={"The","quick","brown","fox","jumps","over","the","lazy","dog"};
 
