@@ -97,6 +97,7 @@ main(){
     }
   }
   toc = get_time_seconds();
+  free(rand_indicies);
   printf("It took you %lf seconds!\n", toc-tic);
   return 0;
 }
