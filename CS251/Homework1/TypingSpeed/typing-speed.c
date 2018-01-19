@@ -10,13 +10,28 @@ int *
 shuffle_n_integers(int array_len)
 {
   int *indicies = malloc(array_len * sizeof(int));
-
+  int temp_values[array_len];
+  int index_tracker[array_len];
   int i;
-  for(i=0;i<array_len;i++){
-    indicies[i] = i;
-    printf("%d\n",indicies[i]);
-  }
 
+  for(i=0;i<array_len;i++){
+    temp_values[i]=i;     // temporary ordered list
+    index_tracker[i] = 1; // keeps track of what indicies have already been used
+  }
+  
+  int j = 0;
+  for(i=0;i<array_len;i++){
+    j = rand() % (array_len - i);  // pick an index between 0 and array_len-i
+    while(1) {
+      if(index_tracker[j] == 0)    // see if the index has already been used
+	j++;                       // if it has go to the next value in array
+      else
+	break;                     // break if found unused value
+    }
+    index_tracker[j] = 0;          // mark value as used
+    indicies[i] = temp_values[j];  // set indicies[i] equal to the j_th value in temp_values
+  }
+  return indicies;
 }
 
 
@@ -42,24 +57,17 @@ flush(void){
 int
 main(){
   int num_words = 9;
-  const char *words[num_words];
-  words[0] = "The";
-  words[1] = "quick";
-  words[2] = "brown";
-  words[3] = "fox";
-  words[4] = "jumps";
-  words[5] = "over";
-  words[6] = "the";
-  words[7] = "lazy";
-  words[8] = "dog";
-  shuffle_n_integers(8); 
+  const char *words[]={"The","quick","brown","fox","jumps","over","the","lazy","dog"};
+
   printf("This is an application to test your typing speed.  Press enter to start\n");
   getchar();  /* Waits for user to press enter */
-  int rand_indicies[] = {0,1,2,3,4,5,6,7,8};
+
+
+  int *rand_indicies = shuffle_n_integers(num_words);
   int i;
   char user_input[6];
   for(i = 0;i<num_words;i++){
-    printf("Word #%d: %s ",i+1,words[i]);
+    printf("Word #%d: %s ",i+1,words[rand_indicies[i]]);
     scanf("%6s",user_input); // chose 6 b/c the words that we are matching are no longer than 6 chars.
     flush();
     
@@ -73,21 +81,3 @@ main(){
   return 0;
 }
 
-/*
-char *
-get_user_input()
-{
-  char input[6] = 0;
-  int c;
-  int i;
-  for(i=0;i<max_input_size;i++){
-    c = getchar();
-    if(c == '\n')
-      return input;
-    input[i] = c;
-  }
-  return input;
-    
-}
-
-*/
