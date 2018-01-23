@@ -1,2 +1,2 @@
-typingscript:
-	gcc -Wall -o typingscript typescript.c
+typescript:
+	gcc -Wall typescript.c -o typescript
