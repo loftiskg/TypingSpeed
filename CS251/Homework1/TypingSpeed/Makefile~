@@ -1,0 +1,2 @@
+typingtest:
+	gcc -Wall -o typingtest typingtest.c
