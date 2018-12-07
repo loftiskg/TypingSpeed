@@ -19,7 +19,7 @@ Should output an executable file `typingspeed`
 
 ## To run:
 ```
-./typingspeed
+./typing_speed
 ```
 
 Enjoy!
