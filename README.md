@@ -15,7 +15,7 @@ To build in the they typical way:
 cd TypingSpeed
 make
 ```
-Should output an executable file `typingspeed`
+Should output an executable file `typing_speed`
 
 ## To run:
 ```
